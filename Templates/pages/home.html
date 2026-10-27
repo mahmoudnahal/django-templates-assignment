@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f4f8; margin: 0; padding: 40px; }
+        h1 { text-align: center; color: #2c3e50; }
+        .grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+        .card { background: #fff; width: 320px; border-radius: 14px; box-shadow: 0 4px 14px rgba(0,0,0,.1); overflow: hidden; }
+        .card img { width: 100%; height: 280px; object-fit: cover; }
+        .info { padding: 20px; }
+        .info h2 { margin: 0 0 12px; color: #2c3e50; }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .row span:first-child { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>Home Page</h1>
+    <div class="grid">
+        {% for p in people %}
+        <div class="card">
+            <img src="{{ p.photo.url }}" alt="{{ p.full_name }}">
+            <div class="info">
+                <h2>{{ p.full_name }}</h2>
+                <div class="row"><span>University ID</span><span>{{ p.university_id }}</span></div>
+                <div class="row"><span>Age</span><span>{{ p.age }}</span></div>
+                <div class="row"><span>Date of Birth</span><span>{{ p.date_of_birth|date:"d M Y" }}</span></div>
+                <div class="row"><span>Address</span><span>{{ p.address }}</span></div>
+                <div class="row"><span>Salary</span><span>${{ p.salary|floatformat:2 }}</span></div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No data yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

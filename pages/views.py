@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime
+from .models import Person
 
 
 def index(request):
@@ -12,3 +13,9 @@ def index(request):
         'birth_date': datetime(2002, 2, 5),
     }
     return render(request, 'pages/index.html', context)
+
+
+
+def home(request):
+    people = Person.objects.all()
+    return render(request, 'pages/home.html', {'people': people})
